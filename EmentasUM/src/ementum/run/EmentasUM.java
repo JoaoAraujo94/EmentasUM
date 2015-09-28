@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ementasum;
+package ementum.run;
+
+import ementum.handler.PDFHandler;
 
 /**
  *
@@ -15,7 +17,11 @@ public class EmentasUM {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here asas 
+        String path = args[0];
+        PDFHandler pdh = new PDFHandler(path);
+        pdh.setUp();
+        String text = pdh.getText();
+        System.out.println(text);
     }
     
 }
