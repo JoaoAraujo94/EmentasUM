@@ -6,6 +6,7 @@
 package ementum.run;
 
 import ementum.handler.PDFHandler;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +22,9 @@ public class EmentasUM {
         PDFHandler pdh = new PDFHandler(path);
         pdh.setUp();
         String text = pdh.getText();
-        System.out.println(text);
+        ArrayList<String> teste = pdh.parseMenu(text);
+        for(String s : teste) {
+            System.out.println(s);
+        }
     }
-    
 }

@@ -3,6 +3,7 @@ package ementum.handler;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.pdfbox.cos.COSDocument;
@@ -32,6 +33,34 @@ public class PDFHandler {
         } catch (IOException ex) {
             Logger.getLogger(PDFHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public ArrayList<String> parseMenu(String menu) {
+        String[] untrimmed = menu.split("\\r?\\n");
+        ArrayList<String> trimmed = new ArrayList<String>();
+        String month = "undefined";
+        String Sday = "undefined";
+        int day = 0;
+        for(int i = 0; i < untrimmed.length; i++) {
+            String s = untrimmed[i];
+            if(i == 0) {
+                month = s.substring(18);
+            } else {
+                if(s.equals(" ") || s.isEmpty() || s.equals(" 2 ")) {
+                    
+                } else {
+                    if(s.substring(0, 3).equals("Dia")) {
+                        Sday = s.substring(4, 6);
+                        Sday = Sday.trim();
+                        day = Integer.parseInt(Sday);
+                    } else {
+                        String food = day + " " + month + s;
+                        trimmed.add(food);
+                    }
+                }
+            }
+        }
+        return trimmed;
     }
     
     public void setUp() {
